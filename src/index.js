@@ -7,9 +7,11 @@ axios.defaults.headers.common['x-api-key'] =
 
 const select = document.querySelector('.breed-select');
 const cardInfo = document.querySelector('.cat-info');
+const loader = document.querySelector('.loader');
 
 fetchBreeds()
   .then(cat => {
+    loader.classList.replace('show', 'hidden');
     select.insertAdjacentHTML('beforeend', cat);
     return cat;
   })

@@ -1,4 +1,9 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+const loader = document.querySelector('.loader');
+
 export default function fetchBreeds() {
+  loader.classList.add('show');
   return fetch('https://api.thecatapi.com/v1/breeds')
     .then(response => {
       if (!response.ok) {
@@ -14,6 +19,7 @@ export default function fetchBreeds() {
         .join('');
     })
     .catch(error => {
+      Notify.failure('Oops! Something went wrong! Try reloading the page!');
       console.log('Error', error);
     });
 }
@@ -29,9 +35,10 @@ export function fetchCatByBreed(breedId) {
       return response.json();
     })
     .then(data => {
-      return `<img src="${data[0].url}" width="600" heigth="400">`;
+      return `<img src="${data[0].url}" class="img" width="600" height="400">`;
     })
     .catch(error => {
+      Notify.failure('Oops! Something went wrong! Try reloading the page!');
       console.log('Error', error);
     });
 }
